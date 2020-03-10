@@ -45,13 +45,12 @@ type Config struct {
 // Create will create a game loop based on a given configuration.
 func Create(c Config) func() {
 	secsPerUpdate := 1 / float64(c.TargetFPS)
-
-	previous := c.CurrentTimeFunc()
-	lag := 0.0
-
 	var current, elapsed float64
 
 	return func() {
+		previous := c.CurrentTimeFunc()
+		lag := 0.0
+
 		for quit := false; !quit; {
 			current = c.CurrentTimeFunc()
 			elapsed = current - previous
